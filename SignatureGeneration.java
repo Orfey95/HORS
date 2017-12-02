@@ -19,11 +19,13 @@ public class SignatureGeneration {
         }
         return blocksOfMessage;
     }
-
-    public String signatureCreation(Integer k, Integer [] blocksOfMessage, Integer [] sk){ // Creating a signature
-        String SIGNATURE= "";
+    public static String SIGNATURE = "";
+    public String signatureCreation(Integer k, Integer t, Integer l, String Message){ // Creating a signature
+        Integer [] blocksOfMessage = separateMessage(Message, k, t);
+        String tempSIGNATURE= "";
         for(int i = 0; i < k; i++){
-            SIGNATURE += sk[blocksOfMessage[i]];
+            tempSIGNATURE = KeyPairGeneration.X.substring(blocksOfMessage[i] * l, blocksOfMessage[i] * l + l);
+            SIGNATURE += tempSIGNATURE;
         }
         return SIGNATURE;
     }
