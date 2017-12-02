@@ -1,3 +1,4 @@
+import Config.*;
 import java.util.Scanner;
 
 public class Main {
@@ -33,6 +34,9 @@ public class Main {
         System.out.println("Length of Public key: " + KeyPairGeneration.Y.length() + " bits");
         System.out.println("Length of Signature: " + SignatureGeneration.SIGNATURE.length() + " bits");
         System.out.println("Time: " + timeConsumedMillis + "ms" + "\n");
+        System.out.println("Resistance for r = 1: 2^-" + resistanceAnalysis(k, S, 1));
+        System.out.println("Resistance for r = 2: 2^-" + resistanceAnalysis(k, S, 2));
+        System.out.println("Resistance for r = 4: 2^-" + resistanceAnalysis(k, S, 4) + "\n");
         //Statistic
         if(sv.verification(Message, k, t, S, l))
             System.out.println("Signature is valid");
@@ -45,6 +49,12 @@ public class Main {
             Reboot();
             main(args);
         }
+    }
+
+    public static Integer resistanceAnalysis(Integer k, Integer S, Integer r){
+        Binarylog bl = new Binarylog();
+        int resistance = (int) (k * (S / k -  bl.binlog((double) k) -  bl.binlog((double) r)));
+        return resistance;
     }
 
     public static void Reboot(){ // Reboot global parametrs
