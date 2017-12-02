@@ -13,17 +13,17 @@ public class PRG {
     private int LFSR() {
         ///(31,3,0)
         ShiftRegister = ((((ShiftRegister >> 3)
-                ^ (ShiftRegister)) /* это нулевая степень */
+                ^ (ShiftRegister)) /* СЌС‚Рѕ РЅСѓР»РµРІР°СЏ СЃС‚РµРїРµРЅСЊ */
                 & 0x00000001)
-                << 30) /* а это, "выбивающаяся из ряда" 31-я степень */
+                << 30) /* Р° СЌС‚Рѕ, "РІС‹Р±РёРІР°СЋС‰Р°СЏСЃСЏ РёР· СЂСЏРґР°" 31-СЏ СЃС‚РµРїРµРЅСЊ */
                 | (ShiftRegister >> 1);
         return ShiftRegister & 0x00000001;
     }
 
-    public String Random128(){
+    public String Random128(Integer l){
         String str = "";
         GenerateStartValue();
-        for (int i=0; i<128; i++){
+        for (int i = 0; i < l; i++){
             str += LFSR();
         }
         return  str;
