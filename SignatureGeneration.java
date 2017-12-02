@@ -4,23 +4,23 @@ public class SignatureGeneration {
     Binarylog bl = new Binarylog();
     MD5Binary md5B = new MD5Binary();
 
-    public String hashMessage(String Message){ //Хэширование сообщения
+    public String hashMessage(String Message){ //РҐСЌС€РёСЂРѕРІР°РЅРёРµ СЃРѕРѕР±С‰РµРЅРёСЏ
         Message = md5B.md5Custom(Message);
         return Message;
     }
 
-    public Integer [] separateMessage(String Message, Integer k, Integer t){ // Разделение сообщение на блоки
+    public Integer [] separateMessage(String Message, Integer k, Integer t){ // Р Р°Р·РґРµР»РµРЅРёРµ СЃРѕРѕР±С‰РµРЅРёРµ РЅР° Р±Р»РѕРєРё
         Message = hashMessage(Message);
         Integer [] blocksOfMessage = new Integer[k];
-        int j = 0;  //счетчик для индексов массива
-        for(int i = 0; i < Message.length(); i = i + (int)Math.ceil(bl.binlog((double) t))) { // проход по массиву через каждые w символа для нахождения новой подстроки
-            String S1 = Message.substring(i, i + (int)Math.ceil(bl.binlog((double) t))); // нахождение подстроки с длиной в w символа
-            blocksOfMessage[j++] = Integer.parseInt(S1, 2); // присваивание подстроки к элементу массива
+        int j = 0;  //СЃС‡РµС‚С‡РёРє РґР»СЏ РёРЅРґРµРєСЃРѕРІ РјР°СЃСЃРёРІР°
+        for(int i = 0; i < Message.length(); i = i + (int)Math.ceil(bl.binlog((double) t))) { // РїСЂРѕС…РѕРґ РїРѕ РјР°СЃСЃРёРІСѓ С‡РµСЂРµР· РєР°Р¶РґС‹Рµ w СЃРёРјРІРѕР»Р° РґР»СЏ РЅР°С…РѕР¶РґРµРЅРёСЏ РЅРѕРІРѕР№ РїРѕРґСЃС‚СЂРѕРєРё
+            String S1 = Message.substring(i, i + (int)Math.ceil(bl.binlog((double) t))); // РЅР°С…РѕР¶РґРµРЅРёРµ РїРѕРґСЃС‚СЂРѕРєРё СЃ РґР»РёРЅРѕР№ РІ w СЃРёРјРІРѕР»Р°
+            blocksOfMessage[j++] = Integer.parseInt(S1, 2); // РїСЂРёСЃРІР°РёРІР°РЅРёРµ РїРѕРґСЃС‚СЂРѕРєРё Рє СЌР»РµРјРµРЅС‚Сѓ РјР°СЃСЃРёРІР°
         }
         return blocksOfMessage;
     }
 
-    public String signatureCreation(Integer k, Integer [] blocksOfMessage, Integer [] sk){ // Создание подписи
+    public String signatureCreation(Integer k, Integer [] blocksOfMessage, Integer [] sk){ // РЎРѕР·РґР°РЅРёРµ РїРѕРґРїРёСЃРё
         String SIGNATURE= "";
         for(int i = 0; i < k; i++){
             SIGNATURE += sk[blocksOfMessage[i]];
