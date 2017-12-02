@@ -1,2 +1,2 @@
 # HORS
-HORS OTS algorithm.
+HORS OTS algorithm...
