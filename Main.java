@@ -34,9 +34,9 @@ public class Main {
         System.out.println("Length of Public key: " + KeyPairGeneration.Y.length() + " bits");
         System.out.println("Length of Signature: " + SignatureGeneration.SIGNATURE.length() + " bits");
         System.out.println("Time: " + timeConsumedMillis + "ms" + "\n");
-        System.out.println("Resistance for r = 1: 2^-" + resistanceAnalysis(k, S, 1));
-        System.out.println("Resistance for r = 2: 2^-" + resistanceAnalysis(k, S, 2));
-        System.out.println("Resistance for r = 4: 2^-" + resistanceAnalysis(k, S, 4) + "\n");
+        System.out.println("Resistance for r = 1: 2^" + resistanceAnalysis(k, S, 1) * (-1));
+        System.out.println("Resistance for r = 2: 2^" + resistanceAnalysis(k, S, 2) * (-1));
+        System.out.println("Resistance for r = 4: 2^" + resistanceAnalysis(k, S, 4) * (-1) + "\n");
         //Statistic
         if(sv.verification(Message, k, t, S, l))
             System.out.println("Signature is valid");
@@ -63,3 +63,4 @@ public class Main {
         SignatureGeneration.SIGNATURE = "";
     }
 }
+
